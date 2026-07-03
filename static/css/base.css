@@ -1,0 +1,201 @@
+/* Global reset, typography and shared layout primitives.
+   Component-specific styles live in css/components/. */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+a:hover {
+    color: var(--color-primary-dark);
+}
+
+h1, h2, h3, h4 {
+    line-height: 1.25;
+    font-weight: 700;
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+/* Centered page column used by every section */
+.container {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--container-pad);
+}
+
+/* Vertical rhythm for page sections; alternate backgrounds like the
+   original site with the --alt modifier */
+.section {
+    padding-block: var(--space-lg);
+}
+
+.section--alt {
+    background: var(--color-bg-alt);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.65rem 1.75rem;
+    border-radius: var(--radius);
+    border: 2px solid var(--color-primary);
+    transition: background var(--transition), color var(--transition);
+}
+
+.btn--primary {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+}
+
+.btn--primary:hover {
+    background: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    color: var(--color-on-primary);
+}
+
+.btn--outline {
+    background: transparent;
+    color: var(--color-primary);
+}
+
+.btn--outline:hover {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+}
+
+.btn--danger {
+    background: var(--color-danger);
+    border-color: var(--color-danger);
+    color: var(--color-on-primary);
+}
+
+.btn--danger:hover {
+    background: var(--color-danger-dark);
+    border-color: var(--color-danger-dark);
+    color: var(--color-on-primary);
+}
+
+.btn--small {
+    padding: 0.3rem 0.9rem;
+    font-size: 0.9375rem;
+}
+
+.btn--block {
+    display: block;
+    width: 100%;
+}
+
+/* Forms rendered inline inside table rows (e.g. toggle actions) */
+.inline-form {
+    display: inline;
+}
+
+/* Section helpers shared by public pages */
+.section__title {
+    font-size: clamp(1.5rem, 3vw, 2.125rem);
+    margin-bottom: var(--space-md);
+    text-align: center;
+}
+
+.section__more {
+    text-align: center;
+    margin-top: var(--space-md);
+}
+
+.section__empty {
+    text-align: center;
+    color: var(--color-text-muted);
+    padding-block: var(--space-md);
+}
+
+/* Generic page column (list/detail pages) */
+.page {
+    padding-block: var(--space-md) var(--space-lg);
+}
+
+.page__head {
+    text-align: center;
+    margin-bottom: var(--space-md);
+}
+
+.page__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+/* Flash messages (Django messages framework) */
+.messages {
+    padding-block: var(--space-sm);
+}
+
+.message {
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius);
+    background: var(--color-bg-muted);
+    border: 1px solid var(--color-border);
+}
+
+.message--success {
+    background: #e8f5e9;
+    border-color: var(--color-success);
+    color: var(--color-success);
+}
+
+.message--error {
+    background: #fdecea;
+    border-color: var(--color-danger);
+    color: var(--color-danger);
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+}
+
+.pagination__status {
+    color: var(--color-text-muted);
+}
+
+/* Used by modal.js to stop background scrolling while a modal is open */
+.no-scroll {
+    overflow: hidden;
+}

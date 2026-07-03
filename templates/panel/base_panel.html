@@ -1,0 +1,65 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Admin panel{% endblock %} — Darulbayan</title>
+    <link rel="icon" type="image/png" href="{% static 'img/logo.png' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caladea:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components/forms.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components/tables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components/modal.css' %}">
+    <link rel="stylesheet" href="{% static 'css/panel/panel.css' %}">
+</head>
+<body class="panel-body">
+    <aside class="panel-sidebar" id="panel-sidebar">
+        <a class="panel-sidebar__brand" href="{% url 'panel:dashboard' %}">
+            <img src="{% static 'img/logo.png' %}" alt="Darulbayan logo">
+            <span>Admin panel</span>
+        </a>
+        <nav class="panel-sidebar__nav">
+            {% include "components/nav_link.html" with css="panel-sidebar__link" key="dashboard" url_name="panel:dashboard" label="Dashboard" %}
+            {% include "components/nav_link.html" with css="panel-sidebar__link" key="events" url_name="panel:events" label="Events" %}
+            {% include "components/nav_link.html" with css="panel-sidebar__link" key="newsletter" url_name="panel:newsletter" label="Newsletter" %}
+            {% include "components/nav_link.html" with css="panel-sidebar__link" key="gallery" url_name="panel:gallery" label="Gallery" %}
+            {% include "components/nav_link.html" with css="panel-sidebar__link" key="enquiries" url_name="panel:enquiries" label="Enquiries" %}
+            {% include "components/nav_link.html" with css="panel-sidebar__link" key="users" url_name="panel:users" label="Users" %}
+        </nav>
+        <div class="panel-sidebar__footer">
+            <a href="{% url 'website:home' %}">View site</a>
+            <form method="post" action="{% url 'panel:logout' %}">
+                {% csrf_token %}
+                <button class="panel-sidebar__logout" type="submit">Log out</button>
+            </form>
+        </div>
+    </aside>
+
+    <div class="panel-main">
+        <header class="panel-topbar">
+            <button class="panel-topbar__toggle" type="button" data-sidebar-toggle
+                    aria-expanded="false" aria-controls="panel-sidebar" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+            <span class="panel-topbar__user">{{ request.user }}</span>
+        </header>
+        <main class="panel-content">
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <p class="message message--{{ message.tags }}">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    {% include "components/modal.html" %}
+    <script src="{% static 'js/modal.js' %}" defer></script>
+    <script src="{% static 'js/panel.js' %}" defer></script>
+</body>
+</html>

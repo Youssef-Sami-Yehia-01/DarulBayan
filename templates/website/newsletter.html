@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Newsletter — Darulbayan Arabic School Aberdeen{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/website/pages.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container page">
+        <header class="page__head">
+            <h1 class="page__title">Newsletter</h1>
+        </header>
+        {% if object_list %}
+            <div class="card-grid">
+                {% for post in object_list %}
+                    {% include "components/cards/post_card.html" %}
+                {% endfor %}
+            </div>
+            {% include "components/pagination.html" %}
+        {% else %}
+            <p class="section__empty">No updates published yet — check back soon.</p>
+        {% endif %}
+    </div>
+{% endblock %}

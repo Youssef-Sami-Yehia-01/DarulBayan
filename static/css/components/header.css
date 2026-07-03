@@ -1,0 +1,112 @@
+/* Site header: brand on the left, nav on the right,
+   collapsing to a hamburger menu below 768px. */
+
+.site-header {
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: var(--header-height);
+    gap: var(--space-sm);
+}
+
+.site-header__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-text);
+}
+
+.site-header__logo {
+    height: 3rem;
+    width: auto;
+}
+
+.site-header__name {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.site-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.site-nav__link {
+    color: var(--color-text);
+    font-size: 1.0625rem;
+    padding-block: 0.25rem;
+    border-bottom: 2px solid transparent;
+}
+
+.site-nav__link:hover,
+.site-nav__link--active {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+}
+
+/* Hamburger button (hidden on desktop) */
+.site-header__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0.5rem;
+}
+
+.site-header__toggle span {
+    width: 24px;
+    height: 2px;
+    background: var(--color-text);
+    transition: transform var(--transition), opacity var(--transition);
+}
+
+/* Cross animation while the menu is open */
+.site-header__toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.site-header__toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+}
+
+.site-header__toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 767px) {
+    .site-header__toggle {
+        display: flex;
+    }
+
+    /* Nav becomes a dropdown panel under the header bar */
+    .site-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        background: var(--color-bg);
+        border-bottom: 1px solid var(--color-border);
+        box-shadow: var(--shadow-card);
+    }
+
+    .site-nav--open {
+        display: flex;
+    }
+
+    .site-nav__link {
+        padding: 0.875rem var(--container-pad);
+        border-bottom: 1px solid var(--color-border);
+    }
+}

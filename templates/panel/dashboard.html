@@ -1,0 +1,50 @@
+{% extends "panel/base_panel.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <div class="panel-page__head">
+        <h1 class="panel-page__title">Dashboard</h1>
+    </div>
+
+    <div class="stat-grid">
+        <a class="stat" href="{% url 'panel:events' %}">
+            <span class="stat__value">{{ event_count }}</span>
+            <span class="stat__label">Events</span>
+        </a>
+        <a class="stat" href="{% url 'panel:newsletter' %}">
+            <span class="stat__value">{{ post_count }}</span>
+            <span class="stat__label">Newsletter posts</span>
+        </a>
+        <a class="stat" href="{% url 'panel:gallery' %}">
+            <span class="stat__value">{{ image_count }}</span>
+            <span class="stat__label">Gallery images</span>
+        </a>
+        <a class="stat" href="{% url 'panel:users' %}">
+            <span class="stat__value">{{ user_count }}</span>
+            <span class="stat__label">Users</span>
+        </a>
+        <a class="stat{% if open_enquiry_count %} stat--attention{% endif %}" href="{% url 'panel:enquiries' %}">
+            <span class="stat__value">{{ open_enquiry_count }}</span>
+            <span class="stat__label">Open enquiries</span>
+        </a>
+    </div>
+
+    {% if open_enquiries %}
+        <h2 class="panel-page__subtitle">Latest open enquiries</h2>
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Name</th><th>Email</th><th>Received</th></tr></thead>
+                <tbody>
+                    {% for enquiry in open_enquiries %}
+                        <tr>
+                            <td>{{ enquiry.name }}</td>
+                            <td>{{ enquiry.email }}</td>
+                            <td>{{ enquiry.created_at|date:"j M Y, g:i A" }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+{% endblock %}

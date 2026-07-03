@@ -1,0 +1,11 @@
+{% comment %}Event card used on the homepage and the Events page.{% endcomment %}
+<article class="card">
+    {% if event.image %}<img class="card__image" src="{{ event.image.url }}" alt="{{ event.title }}" loading="lazy">{% endif %}
+    <div class="card__body">
+        <p class="card__meta">
+            {{ event.date|date:"j F Y" }}{% if event.time %} &middot; {{ event.time|time:"g:i A" }}{% endif %}{% if event.location %} &middot; {{ event.location }}{% endif %}
+        </p>
+        <h3 class="card__title">{{ event.title }}</h3>
+        <p class="card__text">{{ event.description|truncatewords:30 }}</p>
+    </div>
+</article>

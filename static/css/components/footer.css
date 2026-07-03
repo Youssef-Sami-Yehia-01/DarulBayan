@@ -1,0 +1,44 @@
+/* Dark site footer with contact details and social links. */
+
+.site-footer {
+    background: var(--color-footer-bg);
+    color: var(--color-footer-text);
+    margin-top: var(--space-lg);
+}
+
+.site-footer a {
+    color: var(--color-footer-text);
+}
+
+.site-footer a:hover {
+    color: var(--color-accent);
+}
+
+.site-footer__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    padding-block: var(--space-md);
+}
+
+.site-footer__heading {
+    font-size: 1.125rem;
+    margin-bottom: var(--space-xs);
+}
+
+.site-footer__address {
+    font-style: normal;
+}
+
+.site-footer__bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-block: var(--space-sm);
+    font-size: 0.9375rem;
+}
+
+/* Stack the columns on tablets and phones */
+@media (max-width: 767px) {
+    .site-footer__grid {
+        grid-template-columns: 1fr;
+    }
+}

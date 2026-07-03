@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ object.title }} — Darulbayan Arabic School Aberdeen{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/website/pages.css' %}">
+{% endblock %}
+
+{% block content %}
+    <article class="container page article">
+        <header class="page__head">
+            <p class="card__meta">{{ object.published_date|date:"j F Y" }}</p>
+            <h1 class="page__title">{{ object.title }}</h1>
+        </header>
+        {% if object.image %}
+            <img class="article__image" src="{{ object.image.url }}" alt="{{ object.title }}">
+        {% endif %}
+        <div class="article__body">{{ object.body|linebreaks }}</div>
+        <p><a class="btn btn--outline" href="{% url 'website:newsletter' %}">Back to newsletter</a></p>
+    </article>
+{% endblock %}

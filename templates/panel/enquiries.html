@@ -1,0 +1,16 @@
+{% extends "panel/crud/list.html" %}
+{% comment %}Enquiries reuse the generic table but with view/toggle actions
+instead of add/edit.{% endcomment %}
+
+{% block toolbar %}{% endblock %}
+
+{% block row_actions %}
+    <button class="btn btn--small btn--outline" type="button" data-modal-url="{% url 'panel:enquiry_detail' obj.pk %}">View</button>
+    <form class="inline-form" method="post" action="{% url 'panel:enquiry_toggle' obj.pk %}">
+        {% csrf_token %}
+        <button class="btn btn--small btn--outline" type="submit">
+            {% if obj.is_handled %}Reopen{% else %}Mark handled{% endif %}
+        </button>
+    </form>
+    <button class="btn btn--small btn--danger" type="button" data-modal-url="{% url 'panel:enquiry_delete' obj.pk %}">Delete</button>
+{% endblock %}

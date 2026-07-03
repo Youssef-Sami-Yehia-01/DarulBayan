@@ -1,0 +1,13 @@
+{% comment %}Delete confirmation fragment loaded into the popup modal.{% endcomment %}
+<h2 class="modal__title">Confirm deletion</h2>
+{% if error %}
+    <div class="form-errors"><p>{{ error }}</p></div>
+{% endif %}
+<p class="modal__text">Delete &ldquo;{{ object }}&rdquo;? This cannot be undone.</p>
+<form method="post" action="{{ request.path }}">
+    {% csrf_token %}
+    <div class="form-actions">
+        <button class="btn btn--outline" type="button" data-modal-close>Cancel</button>
+        <button class="btn btn--danger" type="submit">Delete</button>
+    </div>
+</form>

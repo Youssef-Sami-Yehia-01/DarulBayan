@@ -1,0 +1,9 @@
+{% comment %}Newsletter post card used on the homepage and the Newsletter page.{% endcomment %}
+<article class="card">
+    {% if post.image %}<img class="card__image" src="{{ post.image.url }}" alt="{{ post.title }}" loading="lazy">{% endif %}
+    <div class="card__body">
+        <p class="card__meta">{{ post.published_date|date:"j F Y" }}</p>
+        <h3 class="card__title"><a class="card__link" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+        <p class="card__text">{{ post.body|truncatewords:30 }}</p>
+    </div>
+</article>

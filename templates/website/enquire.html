@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Enquire — Darulbayan Arabic School Aberdeen{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/components/forms.css' %}">
+    <link rel="stylesheet" href="{% static 'css/website/pages.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container page">
+        <header class="page__head">
+            <h1 class="page__title">Enquire</h1>
+            <p>Book your free first lesson or ask us anything — we're happy to help.</p>
+        </header>
+
+        <div class="enquire">
+            <div class="enquire__info">
+                <h2>Visit us</h2>
+                <address class="enquire__address">
+                    Shah Mustafa Jame Masjid<br>
+                    16 Crown Terrace, Aberdeen AB11 6HD, UK
+                </address>
+                <p><a href="tel:+447886347789">+44 7886 347789</a><br>
+                   <a href="mailto:darulbayan.aberdeen@gmail.com">darulbayan.aberdeen@gmail.com</a></p>
+            </div>
+
+            <form class="enquire__form" method="post" novalidate>
+                {% csrf_token %}
+                {% include "components/form_fields.html" %}
+                <button class="btn btn--primary" type="submit">Send enquiry</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

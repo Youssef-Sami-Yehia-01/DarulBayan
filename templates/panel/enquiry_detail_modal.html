@@ -1,0 +1,12 @@
+{% comment %}Read-only enquiry fragment shown inside the popup modal.{% endcomment %}
+<h2 class="modal__title">Enquiry from {{ object.name }}</h2>
+<dl class="detail-list">
+    <dt>Email</dt><dd><a href="mailto:{{ object.email }}">{{ object.email }}</a></dd>
+    {% if object.phone %}<dt>Phone</dt><dd><a href="tel:{{ object.phone }}">{{ object.phone }}</a></dd>{% endif %}
+    <dt>Received</dt><dd>{{ object.created_at|date:"j F Y, g:i A" }}</dd>
+    <dt>Status</dt><dd>{% if object.is_handled %}Handled{% else %}Open{% endif %}</dd>
+</dl>
+<div class="modal__text">{{ object.message|linebreaks }}</div>
+<div class="form-actions">
+    <button class="btn btn--outline" type="button" data-modal-close>Close</button>
+</div>

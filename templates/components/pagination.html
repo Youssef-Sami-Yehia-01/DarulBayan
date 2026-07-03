@@ -1,0 +1,15 @@
+{% comment %}
+Prev/next pagination for any paginated ListView. Optional `extra_query`
+keeps filters (e.g. "&category=trips") across pages.
+{% endcomment %}
+{% if is_paginated %}
+    <nav class="pagination" aria-label="Pagination">
+        {% if page_obj.has_previous %}
+            <a class="btn btn--outline btn--small" href="?page={{ page_obj.previous_page_number }}{{ extra_query }}">Previous</a>
+        {% endif %}
+        <span class="pagination__status">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+            <a class="btn btn--outline btn--small" href="?page={{ page_obj.next_page_number }}{{ extra_query }}">Next</a>
+        {% endif %}
+    </nav>
+{% endif %}

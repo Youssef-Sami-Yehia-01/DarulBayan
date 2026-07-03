@@ -1,0 +1,50 @@
+{% extends "panel/base_panel.html" %}
+{% load core_tags %}
+{% comment %}
+Generic resource table. The view (PanelListView subclass) provides:
+title, columns, create_url/edit_url/delete_url. Templates for specific
+resources may extend this and override the toolbar/row_actions blocks.
+{% endcomment %}
+
+{% block title %}{{ view.title }}{% endblock %}
+
+{% block content %}
+    <div class="panel-page__head">
+        <h1 class="panel-page__title">{{ view.title }}</h1>
+        <div class="panel-page__actions">
+            {% block toolbar %}
+                {% if view.create_url %}
+                    <button class="btn btn--primary" type="button" data-modal-url="{% url view.create_url %}">Add</button>
+                {% endif %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <div class="table-wrap">
+        <table class="table">
+            <thead>
+                <tr>
+                    {% for field, label in view.columns %}<th>{{ label }}</th>{% endfor %}
+                    <th class="table__actions">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obj in object_list %}
+                    <tr>
+                        {% for field, label in view.columns %}<td>{{ obj|field_value:field }}</td>{% endfor %}
+                        <td class="table__actions">
+                            {% block row_actions %}
+                                <button class="btn btn--small btn--outline" type="button" data-modal-url="{% url view.edit_url obj.pk %}">Edit</button>
+                                <button class="btn btn--small btn--danger" type="button" data-modal-url="{% url view.delete_url obj.pk %}">Delete</button>
+                            {% endblock %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr><td class="table__empty" colspan="{{ view.columns|length|add:1 }}">Nothing here yet.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% include "components/pagination.html" %}
+{% endblock %}

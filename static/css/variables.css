@@ -1,0 +1,47 @@
+/* Design tokens sampled from darulbayan.co.uk — the single source of truth
+   for colors, fonts and spacing. Components must use these variables,
+   never raw hex values. */
+:root {
+    /* Colors */
+    --color-primary: #1976d2;
+    --color-primary-dark: #135ba8;   /* hover shade of primary */
+    --color-accent: #ffbf00;
+    --color-on-primary: #ffffff;
+
+    --color-text: #000000;
+    --color-text-muted: #444950;
+
+    --color-bg: #ffffff;
+    --color-bg-alt: #f9f9f9;
+    --color-bg-muted: #ebedf0;
+
+    --color-border: #e0e0e0;
+    --color-border-input: #d4d7e5;
+
+    --color-footer-bg: #2d3035;
+    --color-footer-text: #ffffff;
+
+    /* Functional colors (errors / destructive actions) */
+    --color-danger: #c0392b;
+    --color-danger-dark: #96281b;
+    --color-success: #2e7d32;
+
+    /* Typography — Caladea is used for everything on the original site */
+    --font-main: "Caladea", Arial, sans-serif;
+
+    /* Layout */
+    --container-max: 1140px;
+    --container-pad: 1.25rem;
+    --header-height: 4.5rem;
+
+    /* Spacing scale */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 2rem;
+    --space-lg: 4rem;
+
+    /* Effects */
+    --radius: 6px;
+    --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --transition: 0.2s ease;
+}

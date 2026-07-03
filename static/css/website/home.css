@@ -1,0 +1,28 @@
+/* Homepage hero */
+
+.hero {
+    background: var(--color-bg-alt);
+    text-align: center;
+}
+
+.hero__inner {
+    padding-block: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.hero__logo {
+    height: 7rem;
+    width: auto;
+}
+
+.hero__title {
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.hero__subtitle {
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    color: var(--color-text-muted);
+}

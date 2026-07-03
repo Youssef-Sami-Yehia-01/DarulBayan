@@ -1,0 +1,50 @@
+/* Data tables used across the admin panel. */
+
+.table-wrap {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow-x: auto;   /* keeps wide tables usable on phones */
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.table th {
+    background: var(--color-bg-alt);
+    font-weight: 700;
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.table tbody tr:hover {
+    background: var(--color-bg-alt);
+}
+
+.table__actions {
+    text-align: right;
+    width: 1%;   /* shrink to fit the buttons */
+}
+
+.table__actions .btn + .btn,
+.table__actions .inline-form {
+    margin-left: 0.25rem;
+}
+
+.table__empty {
+    text-align: center;
+    color: var(--color-text-muted);
+    padding-block: var(--space-md);
+}

@@ -1,0 +1,23 @@
+{% load static %}
+<header class="site-header">
+    <div class="container site-header__inner">
+        <a class="site-header__brand" href="{% url 'website:home' %}">
+            <img class="site-header__logo" src="{% static 'img/logo.png' %}" alt="Darulbayan logo">
+            <span class="site-header__name">Darulbayan</span>
+        </a>
+
+        {# Hamburger, shown on mobile/tablet only; toggled by js/nav.js #}
+        <button class="site-header__toggle" type="button"
+                aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+
+        <nav id="site-nav" class="site-nav">
+            {% include "components/nav_link.html" with css="site-nav__link" key="home" url_name="website:home" label="Home" %}
+            {% include "components/nav_link.html" with css="site-nav__link" key="events" url_name="website:events" label="Events" %}
+            {% include "components/nav_link.html" with css="site-nav__link" key="newsletter" url_name="website:newsletter" label="Newsletter" %}
+            {% include "components/nav_link.html" with css="site-nav__link" key="gallery" url_name="website:gallery" label="Gallery" %}
+            {% include "components/nav_link.html" with css="site-nav__link" key="enquire" url_name="website:enquire" label="Enquire" %}
+        </nav>
+    </div>
+</header>

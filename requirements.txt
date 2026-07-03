@@ -1,0 +1,20 @@
+# Core framework
+Django==6.0.6
+
+# Database: Neon Postgres
+psycopg[binary]==3.3.4
+dj-database-url==3.1.2
+
+# Configuration
+python-dotenv==1.2.2
+
+# File storage: Cloudflare R2 (S3-compatible)
+django-storages==1.14.6
+boto3==1.43.40
+
+# Images (gallery, event photos)
+Pillow==12.3.0
+
+# Production serving (Render)
+gunicorn==26.0.0
+whitenoise==6.12.0

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Darulbayan Arabic School Aberdeen — Arabic &amp; Islamic Studies for All Ages{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/website/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/website/pages.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <div class="container hero__inner">
+            <img class="hero__logo" src="{% static 'img/logo.png' %}" alt="Darulbayan logo">
+            <h1 class="hero__title">Arabic &amp; Islamic Studies for All Ages</h1>
+            <p class="hero__subtitle">Aberdeen's Leading Learning Hub</p>
+            <a class="btn btn--primary" href="{% url 'website:enquire' %}">Enquire now</a>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section__title">Upcoming events</h2>
+            {% if events %}
+                <div class="card-grid">
+                    {% for event in events %}
+                        {% include "components/cards/event_card.html" %}
+                    {% endfor %}
+                </div>
+                <p class="section__more"><a class="btn btn--outline" href="{% url 'website:events' %}">All events</a></p>
+            {% else %}
+                <p class="section__empty">No events announced yet — check back soon.</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <section class="section section--alt">
+        <div class="container">
+            <h2 class="section__title">Newsletter</h2>
+            {% if posts %}
+                <div class="card-grid">
+                    {% for post in posts %}
+                        {% include "components/cards/post_card.html" %}
+                    {% endfor %}
+                </div>
+                <p class="section__more"><a class="btn btn--outline" href="{% url 'website:newsletter' %}">All updates</a></p>
+            {% else %}
+                <p class="section__empty">No updates published yet — check back soon.</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section__title">Gallery</h2>
+            {% if gallery_images %}
+                <div class="gallery-grid">
+                    {% for image in gallery_images %}
+                        <figure class="gallery-item">
+                            <img src="{{ image.image.url }}" alt="{{ image.caption|default:image.category.name }}" loading="lazy">
+                        </figure>
+                    {% endfor %}
+                </div>
+                <p class="section__more"><a class="btn btn--outline" href="{% url 'website:gallery' %}">Full gallery</a></p>
+            {% else %}
+                <p class="section__empty">Photos are on their way.</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <section class="section section--alt">
+        <div class="container cta">
+            <h2 class="section__title">Ready to join us?</h2>
+            <p>Get in touch and book your free first lesson.</p>
+            <a class="btn btn--primary" href="{% url 'website:enquire' %}">Enquire now</a>
+        </div>
+    </section>
+{% endblock %}

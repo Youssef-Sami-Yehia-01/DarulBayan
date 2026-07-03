@@ -1,0 +1,11 @@
+{% comment %}
+Popup modal shell. Content is loaded into #modal-body by static/js/modal.js
+from any element carrying data-modal-url. Hidden until opened.
+{% endcomment %}
+<div class="modal" id="modal" hidden>
+    <div class="modal__backdrop" data-modal-close></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true">
+        <button class="modal__close" type="button" data-modal-close aria-label="Close">&times;</button>
+        <div class="modal__body" id="modal-body"></div>
+    </div>
+</div>

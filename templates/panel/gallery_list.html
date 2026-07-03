@@ -1,0 +1,33 @@
+{% extends "panel/base_panel.html" %}
+
+{% block title %}Gallery{% endblock %}
+
+{% block content %}
+    <div class="panel-page__head">
+        <h1 class="panel-page__title">Gallery</h1>
+        <div class="panel-page__actions">
+            <a class="btn btn--outline" href="{% url 'panel:categories' %}">Manage categories</a>
+            <button class="btn btn--primary" type="button" data-modal-url="{% url 'panel:image_add' %}">Add image</button>
+        </div>
+    </div>
+
+    {% if object_list %}
+        <div class="admin-gallery">
+            {% for image in object_list %}
+                <figure class="admin-gallery__item">
+                    <img src="{{ image.image.url }}" alt="{{ image.caption|default:image.category.name }}" loading="lazy">
+                    <figcaption class="admin-gallery__meta">
+                        <span>{{ image.category.name }}</span>
+                        <span class="admin-gallery__actions">
+                            <button class="btn btn--small btn--outline" type="button" data-modal-url="{% url 'panel:image_edit' image.pk %}">Edit</button>
+                            <button class="btn btn--small btn--danger" type="button" data-modal-url="{% url 'panel:image_delete' image.pk %}">Delete</button>
+                        </span>
+                    </figcaption>
+                </figure>
+            {% endfor %}
+        </div>
+        {% include "components/pagination.html" %}
+    {% else %}
+        <p class="section__empty">No images uploaded yet.</p>
+    {% endif %}
+{% endblock %}

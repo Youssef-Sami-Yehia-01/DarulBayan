@@ -1,0 +1,13 @@
+{% comment %}
+Form fragment loaded into the popup modal by modal.js.
+POST goes back to the same URL; 204 = saved, 400 = shown again with errors.
+{% endcomment %}
+<h2 class="modal__title">{{ view.title }}</h2>
+<form method="post" action="{{ request.path }}" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    {% include "components/form_fields.html" %}
+    <div class="form-actions">
+        <button class="btn btn--outline" type="button" data-modal-close>Cancel</button>
+        <button class="btn btn--primary" type="submit">Save</button>
+    </div>
+</form>

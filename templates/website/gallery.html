@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Gallery — Darulbayan Arabic School Aberdeen{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/website/pages.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container page">
+        <header class="page__head">
+            <h1 class="page__title">Gallery</h1>
+        </header>
+
+        <nav class="filter-tabs" aria-label="Gallery categories">
+            <a class="filter-tabs__tab{% if not active_category %} filter-tabs__tab--active{% endif %}"
+               href="{% url 'website:gallery' %}">All</a>
+            {% for category in categories %}
+                <a class="filter-tabs__tab{% if active_category == category.slug %} filter-tabs__tab--active{% endif %}"
+                   href="?category={{ category.slug }}">{{ category.name }}</a>
+            {% endfor %}
+        </nav>
+
+        {% if object_list %}
+            <div class="gallery-grid">
+                {% for image in object_list %}
+                    <figure class="gallery-item">
+                        <img src="{{ image.image.url }}" alt="{{ image.caption|default:image.category.name }}" loading="lazy">
+                        {% if image.caption %}<figcaption class="gallery-item__caption">{{ image.caption }}</figcaption>{% endif %}
+                    </figure>
+                {% endfor %}
+            </div>
+            {% if active_category %}
+                {% include "components/pagination.html" with extra_query="&category="|add:active_category %}
+            {% else %}
+                {% include "components/pagination.html" %}
+            {% endif %}
+        {% else %}
+            <p class="section__empty">No photos in this category yet.</p>
+        {% endif %}
+    </div>
+{% endblock %}
