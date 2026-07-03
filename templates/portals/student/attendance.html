@@ -1,0 +1,30 @@
+{% extends "portals/student/base.html" %}
+
+{% block title %}My attendance{% endblock %}
+
+{% block content %}
+    <div class="panel-page__head">
+        <h1 class="panel-page__title">My attendance</h1>
+        <div class="chip-row">
+            <span class="chip chip--success">Present: {{ attendance_summary.present|default:0 }}</span>
+            <span class="chip chip--danger">Absent: {{ attendance_summary.absent|default:0 }}</span>
+            <span class="chip chip--warn">Late: {{ attendance_summary.late|default:0 }}</span>
+        </div>
+    </div>
+
+    {% if object_list %}
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Date</th><th>Status</th></tr></thead>
+                <tbody>
+                    {% for record in object_list %}
+                        <tr><td>{{ record.date|date:"j F Y" }}</td><td>{{ record.get_status_display }}</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% include "components/pagination.html" %}
+    {% else %}
+        <p class="section__empty">No attendance recorded yet.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "panel/base_panel.html" %}
+{% comment %}Content sections of one info page, editable via modals.{% endcomment %}
+
+{% block title %}{{ page.title }} — sections{% endblock %}
+
+{% block content %}
+    <div class="panel-page__head">
+        <h1 class="panel-page__title">{{ page.title }} — sections</h1>
+        <div class="panel-page__actions">
+            <a class="btn btn--outline" href="{{ page.get_absolute_url }}">View page</a>
+            <a class="btn btn--outline" href="{% url 'panel:pages' %}">All pages</a>
+            <button class="btn btn--primary" type="button" data-modal-url="{% url 'panel:block_add' page.pk %}">Add section</button>
+        </div>
+    </div>
+
+    {% if page.blocks.all %}
+        <div class="block-list">
+            {% for section in page.blocks.all %}
+                <article class="block-item">
+                    <div class="block-item__body">
+                        <p class="card__meta">Position {{ section.order }}</p>
+                        {% if section.heading %}<h2 class="block-item__heading">{{ section.heading }}</h2>{% endif %}
+                        <p>{{ section.body|truncatewords:40 }}</p>
+                    </div>
+                    {% if section.image %}<img class="block-item__thumb" src="{{ section.image.url }}" alt="{{ section.heading|default:page.title }}">{% endif %}
+                    <div class="block-item__actions">
+                        <button class="btn btn--small btn--outline" type="button" data-modal-url="{% url 'panel:block_edit' section.pk %}">Edit</button>
+                        <button class="btn btn--small btn--danger" type="button" data-modal-url="{% url 'panel:block_delete' section.pk %}">Delete</button>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="section__empty">This page has no sections yet.</p>
+    {% endif %}
+{% endblock %}

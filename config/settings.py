@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     "apps.accounts",
     "apps.website",
     "apps.panel",
+    "apps.portals",
 ]
 
 MIDDLEWARE = [
@@ -82,6 +83,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "apps.core.context_processors.nav_pages",
             ],
         },
     },
@@ -109,11 +111,11 @@ if DATABASES["default"]["ENGINE"] == "django.db.backends.postgresql":
 
 AUTH_USER_MODEL = "accounts.User"
 
-# The admin panel is the only login-protected area for now; the portals
-# will plug into the same auth flow later.
-LOGIN_URL = "panel:login"
-LOGIN_REDIRECT_URL = "panel:dashboard"
-LOGOUT_REDIRECT_URL = "panel:login"
+# One shared login; accounts.PostLoginRedirectView sends each role to its
+# own portal (students/parents/teachers) or to the admin panel (staff).
+LOGIN_URL = "accounts:login"
+LOGIN_REDIRECT_URL = "accounts:post_login"
+LOGOUT_REDIRECT_URL = "website:home"
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},

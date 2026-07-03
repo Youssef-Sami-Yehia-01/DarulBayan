@@ -13,11 +13,22 @@ edits all site content (events, newsletter, gallery, images).
 
 ## Layout
 - config/ — env-driven settings, root urls
-- apps/core — shared utilities and template components
-- apps/accounts — custom user model `accounts.User` with `role` field
-- apps/website — public site: pages, events, newsletter, gallery, enquiries
+- apps/core — shared mixins, context processors, generic modal CRUD views
+- apps/accounts — custom user `accounts.User` with `role`; login + role dispatch (/login/ → portal or panel)
+- apps/website — public site: info pages (DB-driven), events, newsletter, gallery, enquiries
+- apps/panel — staff admin panel (/panel/): modal CRUD for all content, users, classes, students, announcements
+- apps/portals — teacher/student/parent portals (/portal/…): classes, attendance, homework, grades, announcements
 - templates/ — base.html + components/ partials + per-app folders
-- static/css/ — variables.css (design tokens), base.css, components/
+- static/css/ — variables.css (design tokens), base.css, components/, panel/, portals/, website/
+
+## Key conventions
+- Modal CRUD: views mix apps.core.views.ModalFormMixin / BaseModalDeleteView with an
+  access mixin; fragments load into components/modal.html via static/js/modal.js
+  (GET fragment, POST → 204 success / 400 re-render).
+- The site logo is white-on-transparent: only place it on the blue header/sidebar
+  or inside a .logo-badge wrapper.
+- Nav highlighting: views set nav_section (NavSectionMixin); links render through
+  components/nav_link.html.
 
 ## Design tokens (sampled from the original site)
 Primary #1976d2, accent #ffbf00, text #000000 / #444950, backgrounds

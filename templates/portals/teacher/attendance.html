@@ -1,0 +1,53 @@
+{% extends "portals/teacher/base.html" %}
+
+{% block title %}Attendance — {{ class_group.name }}{% endblock %}
+
+{% block content %}
+    <div class="panel-page__head">
+        <h1 class="panel-page__title">Attendance — {{ class_group.name }}</h1>
+        <a class="btn btn--outline" href="{% url 'portals:teacher_class' class_group.pk %}">Back to class</a>
+    </div>
+
+    {# Pick a session date; the register below reloads for that day #}
+    <form class="attendance-date" method="get" action="">
+        <label class="form-field__label" for="attendance-date">Date</label>
+        <input id="attendance-date" type="date" name="date" value="{{ day|date:'Y-m-d' }}">
+        <button class="btn btn--outline btn--small" type="submit">Load</button>
+    </form>
+
+    {% if rows %}
+        <form method="post" action="">
+            {% csrf_token %}
+            <input type="hidden" name="date" value="{{ day|date:'Y-m-d' }}">
+            <div class="table-wrap">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            {% for value, label in statuses %}<th>{{ label }}</th>{% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for student, saved in rows %}
+                            <tr>
+                                <td>{{ student }}</td>
+                                {% for value, label in statuses %}
+                                    <td>
+                                        <input type="radio" name="status_{{ student.pk }}" value="{{ value }}"
+                                               aria-label="{{ label }} — {{ student }}"
+                                               {% if saved == value %}checked{% endif %}>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-actions">
+                <button class="btn btn--primary" type="submit">Save attendance</button>
+            </div>
+        </form>
+    {% else %}
+        <p class="section__empty">No students in this class yet.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "portals/base_portal.html" %}
+{% block portal_name %}Student portal{% endblock %}
+{% block brand_url %}{% url 'portals:student_dashboard' %}{% endblock %}
+{% block portal_nav %}
+    {% include "components/nav_link.html" with css="site-nav__link" key="dashboard" url_name="portals:student_dashboard" label="Dashboard" %}
+    {% include "components/nav_link.html" with css="site-nav__link" key="homework" url_name="portals:student_homework" label="Homework" %}
+    {% include "components/nav_link.html" with css="site-nav__link" key="grades" url_name="portals:student_grades" label="Grades" %}
+    {% include "components/nav_link.html" with css="site-nav__link" key="attendance" url_name="portals:student_attendance" label="Attendance" %}
+{% endblock %}

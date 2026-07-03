@@ -1,0 +1,57 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Portal{% endblock %} — Darulbayan</title>
+    <link rel="icon" type="image/png" href="{% static 'img/logo.png' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caladea:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components/forms.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components/tables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components/modal.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components/cards.css' %}">
+    <link rel="stylesheet" href="{% static 'css/portals/portal.css' %}">
+</head>
+<body>
+    {# Top bar reuses the public header component styles (blue, white text) #}
+    <header class="site-header">
+        <div class="container site-header__inner">
+            <a class="site-header__brand" href="{% block brand_url %}{% url 'accounts:post_login' %}{% endblock %}">
+                <img class="site-header__logo" src="{% static 'img/logo.png' %}" alt="Darulbayan logo">
+                <span class="site-header__name">{% block portal_name %}Portal{% endblock %}</span>
+            </a>
+            <button class="site-header__toggle" type="button"
+                    aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+            <nav id="site-nav" class="site-nav">
+                {% block portal_nav %}{% endblock %}
+                <form class="inline-form" method="post" action="{% url 'accounts:logout' %}">
+                    {% csrf_token %}
+                    <button class="site-nav__link" type="submit">Log out</button>
+                </form>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main" class="container portal-content">
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <p class="message message--{{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include "components/modal.html" %}
+    <script src="{% static 'js/nav.js' %}" defer></script>
+    <script src="{% static 'js/modal.js' %}" defer></script>
+</body>
+</html>

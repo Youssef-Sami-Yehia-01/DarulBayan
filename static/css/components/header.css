@@ -1,9 +1,10 @@
-/* Site header: brand on the left, nav on the right,
-   collapsing to a hamburger menu below 768px. */
+/* Site header: blue bar with white text, matching the original site
+   (its own menu variables: --menu_color #1976d2, --menu_text_color #fff).
+   The logo artwork is white, so it needs this dark background.
+   Collapses to a hamburger menu below 768px. */
 
 .site-header {
-    background: var(--color-bg);
-    border-bottom: 1px solid var(--color-border);
+    background: var(--color-primary);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -21,7 +22,11 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    color: var(--color-text);
+    color: var(--color-on-primary);
+}
+
+.site-header__brand:hover {
+    color: var(--color-on-primary);
 }
 
 .site-header__logo {
@@ -41,16 +46,18 @@
 }
 
 .site-nav__link {
-    color: var(--color-text);
+    color: var(--color-on-primary);
     font-size: 1.0625rem;
     padding-block: 0.25rem;
     border-bottom: 2px solid transparent;
+    opacity: 0.9;
 }
 
 .site-nav__link:hover,
 .site-nav__link--active {
-    color: var(--color-primary);
-    border-bottom-color: var(--color-primary);
+    color: var(--color-on-primary);
+    border-bottom-color: var(--color-on-primary);
+    opacity: 1;
 }
 
 /* Hamburger button (hidden on desktop) */
@@ -64,7 +71,7 @@
 .site-header__toggle span {
     width: 24px;
     height: 2px;
-    background: var(--color-text);
+    background: var(--color-on-primary);
     transition: transform var(--transition), opacity var(--transition);
 }
 
@@ -96,8 +103,7 @@
         flex-direction: column;
         align-items: stretch;
         gap: 0;
-        background: var(--color-bg);
-        border-bottom: 1px solid var(--color-border);
+        background: var(--color-primary);
         box-shadow: var(--shadow-card);
     }
 
@@ -107,6 +113,6 @@
 
     .site-nav__link {
         padding: 0.875rem var(--container-pad);
-        border-bottom: 1px solid var(--color-border);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
 }

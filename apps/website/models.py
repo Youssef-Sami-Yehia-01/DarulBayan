@@ -79,6 +79,50 @@ class GalleryImage(models.Model):
         return self.caption or f"Image #{self.pk}"
 
 
+class InfoPage(models.Model):
+    """Informational site page (About, Why Choose, GCSE/A-Level, ...)
+    whose content is fully editable from the admin panel."""
+
+    title = models.CharField(max_length=200)
+    nav_label = models.CharField(
+        max_length=50, help_text="Short text shown in the navigation bar."
+    )
+    slug = models.SlugField(max_length=120, unique=True, blank=True)
+    intro = models.TextField(blank=True)
+    nav_order = models.PositiveIntegerField(default=0)
+    is_published = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["nav_order", "id"]
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.nav_label or self.title)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("website:info_page", kwargs={"slug": self.slug})
+
+
+class ContentBlock(models.Model):
+    """One section of an InfoPage: optional heading/image plus body text."""
+
+    page = models.ForeignKey(InfoPage, on_delete=models.CASCADE, related_name="blocks")
+    heading = models.CharField(max_length=200, blank=True)
+    body = models.TextField()
+    image = models.ImageField(upload_to="pages/", blank=True)
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ["order", "id"]
+
+    def __str__(self):
+        return self.heading or f"Block #{self.pk}"
+
+
 class Enquiry(models.Model):
     """Message submitted through the public Enquire form."""
 

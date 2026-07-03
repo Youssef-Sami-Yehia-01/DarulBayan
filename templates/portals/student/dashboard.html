@@ -1,0 +1,10 @@
+{% extends "portals/student/base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <div class="panel-page__head">
+        <h1 class="panel-page__title">Welcome, {{ request.user.first_name|default:request.user.username }}</h1>
+    </div>
+    {% include "portals/components/overview_sections.html" %}
+{% endblock %}

@@ -1,6 +1,8 @@
 {% comment %}
-Navigation link with active-state highlighting, shared by the public header
-and the panel sidebar. Params: url_name, label, key (matches nav_active from
-NavSectionMixin), css (base class, e.g. "site-nav__link").
+Navigation link with active-state highlighting, shared by the public header,
+portal top bars and the panel sidebar. Params: label, key (matches
+nav_active from NavSectionMixin), css (base class, e.g. "site-nav__link"),
+and either url_name (named route) or url (pre-resolved path).
 {% endcomment %}
-<a class="{{ css }}{% if nav_active == key %} {{ css }}--active{% endif %}" href="{% url url_name %}">{{ label }}</a>
+<a class="{{ css }}{% if nav_active == key %} {{ css }}--active{% endif %}"
+   href="{% if url %}{{ url }}{% else %}{% url url_name %}{% endif %}">{{ label }}</a>

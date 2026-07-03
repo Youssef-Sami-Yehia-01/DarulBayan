@@ -7,7 +7,9 @@ from django.urls import include, path
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("panel/", include("apps.panel.urls")),
-    path("", include("apps.website.urls")),
+    path("portal/", include("apps.portals.urls")),
+    path("", include("apps.accounts.urls")),
+    path("", include("apps.website.urls")),  # keep last: ends in a slug catch-all
 ]
 
 # Serve local media uploads in development when R2 is not configured.

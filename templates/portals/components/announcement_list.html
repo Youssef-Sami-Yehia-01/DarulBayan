@@ -1,0 +1,23 @@
+{% comment %}
+Announcement list shared by portals. Context: announcements;
+can_manage=True adds the teacher delete button.
+{% endcomment %}
+{% for announcement in announcements %}
+    <article class="list-item">
+        <div class="list-item__main">
+            <h3 class="list-item__title">{{ announcement.title }}</h3>
+            <p class="card__meta">
+                {{ announcement.created_at|date:"j F Y" }}
+                {% if announcement.class_group %}&middot; {{ announcement.class_group.name }}{% else %}&middot; Whole school{% endif %}
+            </p>
+            <p>{{ announcement.body|linebreaksbr }}</p>
+        </div>
+        {% if can_manage %}
+            <div class="list-item__actions">
+                <button class="btn btn--small btn--danger" type="button" data-modal-url="{% url 'portals:announcement_delete' announcement.pk %}">Delete</button>
+            </div>
+        {% endif %}
+    </article>
+{% empty %}
+    <p class="section__empty">No announcements yet.</p>
+{% endfor %}

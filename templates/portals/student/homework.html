@@ -1,0 +1,11 @@
+{% extends "portals/student/base.html" %}
+
+{% block title %}Homework{% endblock %}
+
+{% block content %}
+    <div class="panel-page__head">
+        <h1 class="panel-page__title">Homework</h1>
+    </div>
+    {% include "portals/components/homework_list.html" with homework=object_list %}
+    {% include "components/pagination.html" %}
+{% endblock %}

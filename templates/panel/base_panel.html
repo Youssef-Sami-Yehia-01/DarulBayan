@@ -23,15 +23,19 @@
         </a>
         <nav class="panel-sidebar__nav">
             {% include "components/nav_link.html" with css="panel-sidebar__link" key="dashboard" url_name="panel:dashboard" label="Dashboard" %}
+            {% include "components/nav_link.html" with css="panel-sidebar__link" key="pages" url_name="panel:pages" label="Pages" %}
             {% include "components/nav_link.html" with css="panel-sidebar__link" key="events" url_name="panel:events" label="Events" %}
             {% include "components/nav_link.html" with css="panel-sidebar__link" key="newsletter" url_name="panel:newsletter" label="Newsletter" %}
             {% include "components/nav_link.html" with css="panel-sidebar__link" key="gallery" url_name="panel:gallery" label="Gallery" %}
             {% include "components/nav_link.html" with css="panel-sidebar__link" key="enquiries" url_name="panel:enquiries" label="Enquiries" %}
+            {% include "components/nav_link.html" with css="panel-sidebar__link" key="announcements" url_name="panel:announcements" label="Announcements" %}
+            {% include "components/nav_link.html" with css="panel-sidebar__link" key="classes" url_name="panel:classes" label="Classes" %}
+            {% include "components/nav_link.html" with css="panel-sidebar__link" key="students" url_name="panel:students" label="Students" %}
             {% include "components/nav_link.html" with css="panel-sidebar__link" key="users" url_name="panel:users" label="Users" %}
         </nav>
         <div class="panel-sidebar__footer">
             <a href="{% url 'website:home' %}">View site</a>
-            <form method="post" action="{% url 'panel:logout' %}">
+            <form method="post" action="{% url 'accounts:logout' %}">
                 {% csrf_token %}
                 <button class="panel-sidebar__logout" type="submit">Log out</button>
             </form>

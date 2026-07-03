@@ -1,0 +1,40 @@
+{% comment %}
+Student overview shared by the student dashboard and the parent's child
+view. Context comes from services.student_overview: class_group,
+upcoming_homework, announcements, recent_grades, attendance_summary.
+{% endcomment %}
+<div class="overview-grid">
+    <section class="overview-card">
+        <h2 class="overview-card__title">Class</h2>
+        {% if class_group %}
+            <p><strong>{{ class_group.name }}</strong></p>
+            {% if class_group.schedule %}<p class="card__meta">{{ class_group.schedule }}</p>{% endif %}
+            {% if class_group.teacher %}<p class="card__meta">Teacher: {{ class_group.teacher }}</p>{% endif %}
+        {% else %}
+            <p class="card__meta">Not assigned to a class yet.</p>
+        {% endif %}
+    </section>
+    <section class="overview-card">
+        <h2 class="overview-card__title">Attendance</h2>
+        <div class="chip-row">
+            <span class="chip chip--success">Present: {{ attendance_summary.present|default:0 }}</span>
+            <span class="chip chip--danger">Absent: {{ attendance_summary.absent|default:0 }}</span>
+            <span class="chip chip--warn">Late: {{ attendance_summary.late|default:0 }}</span>
+        </div>
+    </section>
+</div>
+
+<section class="portal-section">
+    <h2 class="portal-section__title">Upcoming homework</h2>
+    {% include "portals/components/homework_list.html" with homework=upcoming_homework %}
+</section>
+
+<section class="portal-section">
+    <h2 class="portal-section__title">Recent grades</h2>
+    {% include "portals/components/grades_table.html" with grades=recent_grades %}
+</section>
+
+<section class="portal-section">
+    <h2 class="portal-section__title">Announcements</h2>
+    {% include "portals/components/announcement_list.html" %}
+</section>

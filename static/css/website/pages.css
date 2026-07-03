@@ -62,6 +62,49 @@
     margin-bottom: var(--space-sm);
 }
 
+/* Info pages (About, Why Choose, ...): stacked sections, image beside
+   text on wide screens, alternating sides */
+.page__intro {
+    max-width: 720px;
+    margin-inline: auto;
+    color: var(--color-text-muted);
+}
+
+.info-block {
+    margin-bottom: var(--space-lg);
+}
+
+.info-block--with-image {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: var(--space-md);
+    align-items: center;
+}
+
+.info-block--with-image:nth-child(even) .info-block__image {
+    order: 2;
+}
+
+.info-block__image {
+    width: 100%;
+    border-radius: var(--radius);
+}
+
+.info-block__heading {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-xs);
+}
+
+@media (max-width: 767px) {
+    .info-block--with-image {
+        grid-template-columns: 1fr;
+    }
+
+    .info-block--with-image:nth-child(even) .info-block__image {
+        order: 0;
+    }
+}
+
 /* Homepage call-to-action banner */
 .cta {
     text-align: center;

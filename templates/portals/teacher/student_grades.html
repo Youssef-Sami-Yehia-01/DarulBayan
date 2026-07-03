@@ -1,0 +1,18 @@
+{% extends "portals/teacher/base.html" %}
+
+{% block title %}Grades — {{ student }}{% endblock %}
+
+{% block content %}
+    <div class="panel-page__head">
+        <div>
+            <h1 class="panel-page__title">Grades — {{ student }}</h1>
+            <p class="card__meta">{{ student.class_group.name }}</p>
+        </div>
+        <div class="panel-page__actions">
+            <a class="btn btn--outline" href="{% url 'portals:teacher_class' student.class_group.pk %}">Back to class</a>
+            <button class="btn btn--primary" type="button" data-modal-url="{% url 'portals:grade_add' student.pk %}">Add grade</button>
+        </div>
+    </div>
+
+    {% include "portals/components/grades_table.html" with grades=student.grades.all can_manage=True %}
+{% endblock %}

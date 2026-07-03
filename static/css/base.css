@@ -199,3 +199,40 @@ button {
 .no-scroll {
     overflow: hidden;
 }
+
+/* Page chrome shared by the admin panel and the portals:
+   title row with action buttons on the right */
+.panel-page__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-md);
+}
+
+.panel-page__title {
+    font-size: 1.75rem;
+}
+
+.panel-page__subtitle {
+    font-size: 1.25rem;
+    margin-block: var(--space-md) var(--space-sm);
+}
+
+.panel-page__actions {
+    display: flex;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+}
+
+/* The logo artwork is white-on-transparent, so on light backgrounds it
+   sits on this primary-blue badge (header/sidebar are already dark). */
+.logo-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary);
+    border-radius: var(--radius);
+    padding: 0.75rem 1.25rem;
+}

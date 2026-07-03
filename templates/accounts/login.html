@@ -15,7 +15,7 @@
 </head>
 <body class="login-body">
     <main class="login-card">
-        <img class="login-card__logo" src="{% static 'img/logo.png' %}" alt="Darulbayan logo">
+        <span class="logo-badge login-card__badge"><img class="login-card__logo" src="{% static 'img/logo.png' %}" alt="Darulbayan logo"></span>
         <h1 class="login-card__title">Log in</h1>
         {% if form.errors %}
             <div class="form-errors"><p>Your username and password didn't match. Please try again.</p></div>

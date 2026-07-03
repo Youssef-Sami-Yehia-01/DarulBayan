@@ -1,0 +1,6 @@
+{% extends "portals/base_portal.html" %}
+{% block portal_name %}Parent portal{% endblock %}
+{% block brand_url %}{% url 'portals:parent_dashboard' %}{% endblock %}
+{% block portal_nav %}
+    {% include "components/nav_link.html" with css="site-nav__link" key="children" url_name="portals:parent_dashboard" label="My children" %}
+{% endblock %}

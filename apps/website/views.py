@@ -5,7 +5,7 @@ from django.views.generic import CreateView, DetailView, ListView, TemplateView
 from apps.core.mixins import NavSectionMixin
 
 from .forms import EnquiryForm
-from .models import Event, GalleryCategory, GalleryImage, NewsletterPost
+from .models import Event, GalleryCategory, GalleryImage, InfoPage, NewsletterPost
 
 
 class HomeView(NavSectionMixin, TemplateView):
@@ -62,6 +62,18 @@ class GalleryView(NavSectionMixin, ListView):
         context = super().get_context_data(**kwargs)
         context["categories"] = GalleryCategory.objects.all()
         context["active_category"] = self.request.GET.get("category", "")
+        return context
+
+
+class InfoPageView(DetailView):
+    """Admin-editable content page (About, Why Choose, GCSE/A-Level, ...)."""
+
+    template_name = "website/info_page.html"
+    queryset = InfoPage.objects.filter(is_published=True).prefetch_related("blocks")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["nav_active"] = self.object.slug
         return context
 
 

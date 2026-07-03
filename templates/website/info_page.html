@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ object.title }} — Darulbayan Arabic School Aberdeen{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/website/pages.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container page">
+        <header class="page__head">
+            <h1 class="page__title">{{ object.title }}</h1>
+            {% if object.intro %}<p class="page__intro">{{ object.intro }}</p>{% endif %}
+        </header>
+
+        {% for section in object.blocks.all %}
+            <section class="info-block{% if section.image %} info-block--with-image{% endif %}">
+                {% if section.image %}
+                    <img class="info-block__image" src="{{ section.image.url }}" alt="{{ section.heading|default:object.title }}" loading="lazy">
+                {% endif %}
+                <div class="info-block__text">
+                    {% if section.heading %}<h2 class="info-block__heading">{{ section.heading }}</h2>{% endif %}
+                    {{ section.body|linebreaks }}
+                </div>
+            </section>
+        {% empty %}
+            <p class="section__empty">Content coming soon.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

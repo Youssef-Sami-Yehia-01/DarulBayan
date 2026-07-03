@@ -14,10 +14,18 @@
 
         <nav id="site-nav" class="site-nav">
             {% include "components/nav_link.html" with css="site-nav__link" key="home" url_name="website:home" label="Home" %}
+            {% for page in nav_pages %}
+                {% include "components/nav_link.html" with css="site-nav__link" key=page.slug url=page.get_absolute_url label=page.nav_label %}
+            {% endfor %}
             {% include "components/nav_link.html" with css="site-nav__link" key="events" url_name="website:events" label="Events" %}
             {% include "components/nav_link.html" with css="site-nav__link" key="newsletter" url_name="website:newsletter" label="Newsletter" %}
             {% include "components/nav_link.html" with css="site-nav__link" key="gallery" url_name="website:gallery" label="Gallery" %}
             {% include "components/nav_link.html" with css="site-nav__link" key="enquire" url_name="website:enquire" label="Enquire" %}
+            {% if user.is_authenticated %}
+                {% include "components/nav_link.html" with css="site-nav__link" key="portal" url_name="accounts:post_login" label="My portal" %}
+            {% else %}
+                {% include "components/nav_link.html" with css="site-nav__link" key="portal" url_name="accounts:login" label="Log in" %}
+            {% endif %}
         </nav>
     </div>
 </header>

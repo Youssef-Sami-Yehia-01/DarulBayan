@@ -34,8 +34,12 @@ resources may extend this and override the toolbar/row_actions blocks.
                         {% for field, label in view.columns %}<td>{{ obj|field_value:field }}</td>{% endfor %}
                         <td class="table__actions">
                             {% block row_actions %}
-                                <button class="btn btn--small btn--outline" type="button" data-modal-url="{% url view.edit_url obj.pk %}">Edit</button>
-                                <button class="btn btn--small btn--danger" type="button" data-modal-url="{% url view.delete_url obj.pk %}">Delete</button>
+                                {% if view.edit_url %}
+                                    <button class="btn btn--small btn--outline" type="button" data-modal-url="{% url view.edit_url obj.pk %}">Edit</button>
+                                {% endif %}
+                                {% if view.delete_url %}
+                                    <button class="btn btn--small btn--danger" type="button" data-modal-url="{% url view.delete_url obj.pk %}">Delete</button>
+                                {% endif %}
                             {% endblock %}
                         </td>
                     </tr>

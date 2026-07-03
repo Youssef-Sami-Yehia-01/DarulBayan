@@ -1,0 +1,52 @@
+{% extends "portals/teacher/base.html" %}
+
+{% block title %}{{ class_group.name }}{% endblock %}
+
+{% block content %}
+    <div class="panel-page__head">
+        <div>
+            <h1 class="panel-page__title">{{ class_group.name }}</h1>
+            {% if class_group.schedule %}<p class="card__meta">{{ class_group.schedule }}</p>{% endif %}
+        </div>
+        <div class="panel-page__actions">
+            <a class="btn btn--primary" href="{% url 'portals:teacher_attendance' class_group.pk %}">Take attendance</a>
+            <button class="btn btn--outline" type="button" data-modal-url="{% url 'portals:homework_add' class_group.pk %}">Add homework</button>
+            <button class="btn btn--outline" type="button" data-modal-url="{% url 'portals:announcement_add' class_group.pk %}">Add announcement</button>
+        </div>
+    </div>
+
+    <section class="portal-section">
+        <h2 class="portal-section__title">Students</h2>
+        {% if students %}
+            <div class="table-wrap">
+                <table class="table">
+                    <thead><tr><th>Student</th><th>Username</th><th class="table__actions">Actions</th></tr></thead>
+                    <tbody>
+                        {% for student in students %}
+                            <tr>
+                                <td>{{ student }}</td>
+                                <td>{{ student.user.username }}</td>
+                                <td class="table__actions">
+                                    <a class="btn btn--small btn--outline" href="{% url 'portals:teacher_student_grades' student.pk %}">Grades</a>
+                                    <button class="btn btn--small btn--primary" type="button" data-modal-url="{% url 'portals:grade_add' student.pk %}">Add grade</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="section__empty">No students in this class yet.</p>
+        {% endif %}
+    </section>
+
+    <section class="portal-section">
+        <h2 class="portal-section__title">Homework</h2>
+        {% include "portals/components/homework_list.html" with can_manage=True %}
+    </section>
+
+    <section class="portal-section">
+        <h2 class="portal-section__title">Announcements</h2>
+        {% include "portals/components/announcement_list.html" with can_manage=True %}
+    </section>
+{% endblock %}

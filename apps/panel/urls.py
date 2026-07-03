@@ -1,4 +1,3 @@
-from django.contrib.auth import views as auth_views
 from django.urls import path
 
 from . import views
@@ -6,13 +5,18 @@ from . import views
 app_name = "panel"
 
 urlpatterns = [
-    # Auth
-    path("login/", auth_views.LoginView.as_view(
-        template_name="panel/login.html", redirect_authenticated_user=True), name="login"),
-    path("logout/", auth_views.LogoutView.as_view(), name="logout"),
-
     # Dashboard
     path("", views.DashboardView.as_view(), name="dashboard"),
+
+    # Info pages + content blocks
+    path("pages/", views.InfoPageListView.as_view(), name="pages"),
+    path("pages/add/", views.InfoPageCreateView.as_view(), name="page_add"),
+    path("pages/<int:pk>/edit/", views.InfoPageUpdateView.as_view(), name="page_edit"),
+    path("pages/<int:pk>/delete/", views.InfoPageDeleteView.as_view(), name="page_delete"),
+    path("pages/<int:pk>/blocks/", views.ContentBlockListView.as_view(), name="page_blocks"),
+    path("pages/<int:page_pk>/blocks/add/", views.ContentBlockCreateView.as_view(), name="block_add"),
+    path("blocks/<int:pk>/edit/", views.ContentBlockUpdateView.as_view(), name="block_edit"),
+    path("blocks/<int:pk>/delete/", views.ContentBlockDeleteView.as_view(), name="block_delete"),
 
     # Events
     path("events/", views.EventListView.as_view(), name="events"),
@@ -41,6 +45,22 @@ urlpatterns = [
     path("enquiries/<int:pk>/", views.EnquiryDetailView.as_view(), name="enquiry_detail"),
     path("enquiries/<int:pk>/toggle/", views.EnquiryToggleHandledView.as_view(), name="enquiry_toggle"),
     path("enquiries/<int:pk>/delete/", views.EnquiryDeleteView.as_view(), name="enquiry_delete"),
+
+    # Announcements
+    path("announcements/", views.AnnouncementListView.as_view(), name="announcements"),
+    path("announcements/add/", views.AnnouncementCreateView.as_view(), name="announcement_add"),
+    path("announcements/<int:pk>/edit/", views.AnnouncementUpdateView.as_view(), name="announcement_edit"),
+    path("announcements/<int:pk>/delete/", views.AnnouncementDeleteView.as_view(), name="announcement_delete"),
+
+    # Classes
+    path("classes/", views.ClassGroupListView.as_view(), name="classes"),
+    path("classes/add/", views.ClassGroupCreateView.as_view(), name="class_add"),
+    path("classes/<int:pk>/edit/", views.ClassGroupUpdateView.as_view(), name="class_edit"),
+    path("classes/<int:pk>/delete/", views.ClassGroupDeleteView.as_view(), name="class_delete"),
+
+    # Students
+    path("students/", views.StudentListView.as_view(), name="students"),
+    path("students/<int:pk>/edit/", views.StudentUpdateView.as_view(), name="student_edit"),
 
     # Users
     path("users/", views.UserListView.as_view(), name="users"),

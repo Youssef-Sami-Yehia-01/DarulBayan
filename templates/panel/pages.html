@@ -1,0 +1,7 @@
+{% extends "panel/crud/list.html" %}
+{% comment %}Pages list with an extra per-row link to manage sections.{% endcomment %}
+
+{% block row_actions %}
+    <a class="btn btn--small btn--outline" href="{% url 'panel:page_blocks' obj.pk %}">Sections</a>
+    {{ block.super }}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "portals/student/base.html" %}
+
+{% block title %}My grades{% endblock %}
+
+{% block content %}
+    <div class="panel-page__head">
+        <h1 class="panel-page__title">My grades</h1>
+    </div>
+    {% include "portals/components/grades_table.html" with grades=object_list %}
+    {% include "components/pagination.html" %}
+{% endblock %}

@@ -1,0 +1,34 @@
+{% comment %}
+Grades table shared by portals. Context: grades;
+can_manage=True adds teacher edit/delete buttons.
+{% endcomment %}
+{% if grades %}
+    <div class="table-wrap">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Assessment</th><th>Score</th><th>Date</th><th>Feedback</th>
+                    {% if can_manage %}<th class="table__actions">Actions</th>{% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for grade in grades %}
+                    <tr>
+                        <td>{{ grade.title }}</td>
+                        <td>{{ grade.score }} / {{ grade.max_score }}</td>
+                        <td>{{ grade.date|date:"j M Y" }}</td>
+                        <td>{{ grade.feedback|default:"—" }}</td>
+                        {% if can_manage %}
+                            <td class="table__actions">
+                                <button class="btn btn--small btn--outline" type="button" data-modal-url="{% url 'portals:grade_edit' grade.pk %}">Edit</button>
+                                <button class="btn btn--small btn--danger" type="button" data-modal-url="{% url 'portals:grade_delete' grade.pk %}">Delete</button>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <p class="section__empty">No grades recorded yet.</p>
+{% endif %}

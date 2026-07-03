@@ -1,0 +1,108 @@
+/* Portal-specific layout on top of the shared design system. */
+
+.portal-content {
+    padding-block: var(--space-md) var(--space-lg);
+}
+
+/* Overview cards (student dashboard / parent child view) */
+.overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.overview-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-sm);
+}
+
+.overview-card__title {
+    font-size: 1.125rem;
+    margin-bottom: var(--space-xs);
+}
+
+/* Status chips (attendance summary) */
+.chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+}
+
+.chip {
+    padding: 0.25rem 0.9rem;
+    border-radius: 999px;
+    background: var(--color-bg-muted);
+    font-size: 0.9375rem;
+}
+
+.chip--success {
+    background: #e8f5e9;
+    color: var(--color-success);
+}
+
+.chip--danger {
+    background: #fdecea;
+    color: var(--color-danger);
+}
+
+.chip--warn {
+    background: #fff8e1;
+    color: #8a6d00;
+}
+
+/* Stacked content sections */
+.portal-section {
+    margin-bottom: var(--space-md);
+}
+
+.portal-section__title {
+    font-size: 1.375rem;
+    margin-bottom: var(--space-sm);
+}
+
+/* Homework / announcement items */
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-sm);
+    margin-bottom: var(--space-xs);
+}
+
+.list-item__title {
+    font-size: 1.125rem;
+}
+
+.list-item__actions {
+    display: flex;
+    gap: 0.25rem;
+    flex-shrink: 0;
+}
+
+@media (max-width: 599px) {
+    .list-item {
+        flex-direction: column;
+    }
+}
+
+/* Attendance date picker row */
+.attendance-date {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-sm);
+}
+
+.attendance-date input[type="date"] {
+    padding: 0.4rem 0.6rem;
+    border: 1px solid var(--color-border-input);
+    border-radius: var(--radius);
+    font: inherit;
+}

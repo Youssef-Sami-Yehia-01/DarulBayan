@@ -1,0 +1,24 @@
+{% extends "portals/parent/base.html" %}
+
+{% block title %}My children{% endblock %}
+
+{% block content %}
+    <div class="panel-page__head">
+        <h1 class="panel-page__title">My children</h1>
+    </div>
+    {% if children %}
+        <div class="card-grid">
+            {% for child in children %}
+                <article class="card">
+                    <div class="card__body">
+                        <h2 class="card__title">{{ child }}</h2>
+                        <p class="card__meta">{% if child.class_group %}{{ child.class_group.name }}{% else %}No class assigned yet{% endif %}</p>
+                        <p><a class="btn btn--primary btn--small" href="{% url 'portals:parent_child' child.pk %}">View</a></p>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="section__empty">No children are linked to your account yet — please contact the school.</p>
+    {% endif %}
+{% endblock %}

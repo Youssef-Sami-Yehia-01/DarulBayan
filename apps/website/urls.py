@@ -11,4 +11,6 @@ urlpatterns = [
     path("newsletter/<int:pk>/", views.NewsletterDetailView.as_view(), name="newsletter_detail"),
     path("gallery/", views.GalleryView.as_view(), name="gallery"),
     path("enquire/", views.EnquireView.as_view(), name="enquire"),
+    # Catch-all for admin-editable info pages — keep last.
+    path("<slug:slug>/", views.InfoPageView.as_view(), name="info_page"),
 ]

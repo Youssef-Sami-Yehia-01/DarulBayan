@@ -1,0 +1,25 @@
+{% extends "portals/teacher/base.html" %}
+
+{% block title %}My classes{% endblock %}
+
+{% block content %}
+    <div class="panel-page__head">
+        <h1 class="panel-page__title">My classes</h1>
+    </div>
+    {% if classes %}
+        <div class="card-grid">
+            {% for class_group in classes %}
+                <article class="card">
+                    <div class="card__body">
+                        <h2 class="card__title">{{ class_group.name }}</h2>
+                        {% if class_group.schedule %}<p class="card__meta">{{ class_group.schedule }}</p>{% endif %}
+                        <p class="card__meta">{{ class_group.students.count }} student{{ class_group.students.count|pluralize }}</p>
+                        <p><a class="btn btn--primary btn--small" href="{% url 'portals:teacher_class' class_group.pk %}">Open</a></p>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="section__empty">No classes have been assigned to you yet.</p>
+    {% endif %}
+{% endblock %}
